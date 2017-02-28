@@ -1,0 +1,168 @@
+{% extends "blog/blog_post_list.html" %}
+{% load mezzanine_tags comment_tags keyword_tags rating_tags i18n disqus_tags %}
+{% load static from staticfiles %}
+
+{% block meta_title %}{{ blog_post.meta_title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for blog_post as tags %}
+{% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ blog_post.description }}
+{% endmetablock %}{% endblock %}
+
+
+      {% block main %}
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="card mb-3">
+              <div class="card-block">
+
+      {% block title %}
+      <div class="card-title">
+      {% editable blog_post.title %}<h2>{{ blog_post.title }}</h2>{% endeditable %}
+    </div>
+    {% endblock %}
+
+<!--{% block breadcrumb_menu %}
+{{ block.super }}
+<li class="active">{{ blog_post.title }}</li>
+{% endblock %}-->
+
+
+
+{% block blog_post_list_post_metainfo %}
+      <small class="post-meta text-muted">
+      <i class="fa fa-clock-o" aria-hidden="true"></i>
+      <span class="mr-1">{{ blog_post.publish_date|date:"F d, Y" }}</span>
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      {% with blog_post.user as author %}
+      <span class="mr-1">
+      <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
+    </span>
+      {% endwith %}
+  {% endblock blog_post_list_post_metainfo %}
+  {% if blog_post.allow_comments %}
+    {% if settings.COMMENTS_DISQUS_SHORTNAME %}
+      <i class="fa fa-comments" aria-hidden="true"></i>
+      <a href="{{ blog_post.get_absolute_url }}#disqus_thread"
+          data-disqus-identifier="{% disqus_id_for blog_post %}">
+          {% trans "Comments" %}</a>
+      {% else %}
+      <a href="{{ blog_post.get_absolute_url }}#comments">
+          <i class="fa fa-comments" aria-hidden="true"></i> {{ blog_post.comments_count }}
+      </a>
+    {% endif %}
+  {% endif %}
+  </small>
+
+{% block blog_post_detail_featured_image %}
+{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+<p class="my-1"><img class="card-img img-fluid" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 1200 0 %}"></p>
+{% endif %}
+{% endblock %}
+
+{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+{% include "generic/includes/disqus_counts.html" %}
+{% endif %}
+
+{% block blog_post_detail_content %}
+<div class="card-text mt-3">
+{% editable blog_post.content %}
+{{ blog_post.content|richtext_filters|safe }}
+{% endeditable %}
+</div>
+{% endblock %}
+
+{% block blog_post_detail_keywords %}
+{% keywords_for blog_post as tags %}
+{% if tags %}
+{% spaceless %}
+<ul class="list-inline tags">
+    <li>{% trans "Tags" %}:</li>
+    {% for tag in tags %}
+    <li><a href="{% url "blog_post_list_tag" tag.slug %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}</li>
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endif %}
+{% endblock %}
+</div>
+
+{% block blog_post_detail_sharebuttons %}
+<hr class="style4 mx-2">
+<div class="card-block clearfix py-0">
+  <div class="floating-box-left">Share this post</div>
+{% set_short_url_for blog_post %}
+<div class="floating-box" >
+<a class="mr-1" target="_blank" href="https://twitter.com/intent/tweet?url={{ blog_post.short_url|urlencode }}&amp;text={{ blog_post.title|urlencode }}"><img src="{% static "img/twitter.png" %}" /></a>
+<a class="mr-1" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"><img src="{% static "img/facebook.png" %}" /></a>
+</div>
+</div>
+<hr class="style4 mx-2">
+{% endblock %}
+
+
+{% block blog_post_detail_related_posts %}
+{% if related_posts %}
+<div class="card-block" id="related-posts">
+<h3 class="text-center mb-3">{% trans 'You might also like' %}</h3>
+<div class="flex-images">
+{% for post in related_posts|slice:":3" %}
+<div class="img-holder marginx-10 my-1">
+<a href="{{ post.get_absolute_url }}">
+    {% if settings.BLOG_USE_FEATURED_IMAGE and post.featured_image %}
+    <img src="{{ MEDIA_URL }}{% thumbnail post.featured_image 200 200 %}">
+    {% endif %}
+    <p>{{ post.title }}</p>
+</a>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+</div>
+</div>
+
+{% block blog_post_previous_next %}
+
+    <nav class="d-flex justify-content-center" aria-label="Blog Post Navigation">
+    <ul class="pagination">
+    {% with blog_post.get_previous_by_publish_date as previous %}
+    {% if previous %}
+    <li class="page-item">
+        <a class="page-link" href="{{ previous.get_absolute_url }}">&larr; Previous</a>
+    </li>
+    {% endif %}
+    {% endwith %}
+    {% with blog_post.get_next_by_publish_date as next %}
+    {% if next %}
+    <li class="page-item">
+        <a class="page-link" href="{{ next.get_absolute_url }}">Next &rarr;</a>
+    </li>
+    {% endif %}
+    {% endwith %}
+    </ul>
+    </nav>
+{% endblock %}
+
+
+{% block blog_post_detail_comments %}
+{% if blog_post.allow_comments %}{% comments_for blog_post %}{% endif %}
+{% endblock %}
+</div>
+
+{% block filter_panel %}
+<div class="col-sm-4">
+{% include "blog/includes/filter_panel.html" %}
+</div>
+{% endblock filter_panel %}
+
+</div>
+</div>
+
+
+{% endblock %}

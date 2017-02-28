@@ -44,9 +44,15 @@ from django.utils.translation import ugettext_lazy as _
 
 PAGE_MENU_TEMPLATES = (
      (1, _("Top navigation bar"), "pages/menus/primary.html"),
+<<<<<<< HEAD
      (2, _("Left-hand tree"), "pages/menus/tree.html"),
      (3, _("Footer"), "pages/menus/footer.html"),
  )
+=======
+#     (2, _("Left-hand tree"), "pages/menus/tree.html"),
+#     (3, _("Footer"), "pages/menus/footer.html"),
+# )
+>>>>>>> 3c8bbfc0407117feee6b7f2baf798ab55a410838
 
 # A sequence of fields that will be injected into Mezzanine's (or any
 # library's) models. Each item in the sequence is a four item sequence.
@@ -92,7 +98,7 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['46.101.184.172']
+ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
