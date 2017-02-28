@@ -1,0 +1,69 @@
+{% load pages_tags i18n %}
+{% load static from staticfiles %}
+<!--
+<div class="nav navbar-nav  flex-nav">
+    {% for page in page_branch %}
+        {% if page.in_menu %}
+        <a class="nav-item nav-link {% if page.is_current_or_ascendant %} active {% endif %} {% if forloop.last %} last {% endif %}" href="{{ page.get_absolute_url }}">{{ page.title }}<span class="sr-only">(current)</span></a>
+        {% endif %}
+        {% if forloop.counter == 3 %}
+            <a class="navbar-brand" href="#">Navbar</a>
+        {% endif %}
+    {% endfor %}
+</div>-->
+
+
+{% spaceless %}
+{% if page_branch_in_menu %}
+
+{% if branch_level == 0 %}
+<a class="navbar-brand" href="/"><img src="{% static "img/NinjabunnyLogosmwhite.png" %}" /></a>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+    {% for page in page_branch %}
+    {% if page.in_menu %}
+    <li class="nav-item {% if page.has_children_in_menu %}dropdown{% endif %}
+               {% if page.is_current_or_ascendant %}active{% endif %}" id="{{ page.html_id }}">
+        <a class="nav-link" href="{{ page.get_absolute_url }}"
+        {% if page.has_children_in_menu %}
+        "nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        {% endif %}>
+            {{ page.title }}</a>
+        {% if page.has_children_in_menu %}{% page_menu page %}{% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+{% else %}
+<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    {% for page in page_branch %}
+    {% if page.in_menu %}
+    <a class="dropdown-item {% if page.has_children_in_menu %}dropdown-submenu{% endif %}
+               {% if page.is_current_or_ascendant %}active{% endif %}"
+        id="{{ page.html_id }}" href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+        {% if page.has_children_in_menu %}{% page_menu page %}{% endif %}
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endif %}
+{% endspaceless %}
+
+<!--<form class="form-inline pull-xs-right">
+    <input class="form-control" type="text" placeholder="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>-->
+
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation">
+  &#9776;
+</button>-->
+
+<!--<div class="collapse" id="navbar-header">
+  <div class="container-fluid bg-inverse p-a-1">
+    <h3>Collapsed content</h3>
+    <p>Toggleable via the navbar brand.</p>
+  </div>
+</div>-->

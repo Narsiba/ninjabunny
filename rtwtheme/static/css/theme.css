@@ -1,0 +1,278 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+  flex: 0 0 auto;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+.navbar {
+   background: rgb(0, 0, 0); /* The Fallback */
+   background:rgba(0, 0, 0, .0);   /* for latest browsers */
+   font-family: 'Roboto', sans-serif;
+   font-size: 16px;
+   border-radius: 0px;
+}
+
+.navbar-gallery {
+  background: rgb(64, 64, 64); /* The Fallback */
+  background:rgba(0, 0, 0, .8);   /* for latest browsers */
+  border-top: 2.5px #d00b01 solid; /* Color and size of the line on top of page */
+}
+
+.flex-nav {
+    display: flex;             /* establish flex container */
+    align-items: center;       /* center ul container vertically */
+    justify-content: center;   /* center ul container horizontally (optional) */
+}
+
+/*.nav-item a {color: white;}
+.nav-item a:hover  {color: #d00b01;}*/
+
+.dropdown-menu a {color: grey;}
+.dropdown-menu a:hover {color: #d00b01;}
+a.dropdown-toggle {text-decoration: none;}
+
+.badge-danger {
+  color: #d00b01;
+}
+.badge a {
+  color: white;
+
+}
+
+.badge a:hover {
+  color: grey;
+}
+
+.flex-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+a {color: #000;}
+a:hover {
+  color: #d00b01;
+  text-decoration: none;
+}
+
+.blog-sort-bar {
+  background: #f7f7f9;
+  border-radius: 5px;
+}
+
+.btn-outline-danger {
+  color: #000;
+  border-color: #000;
+}
+
+.btn-outline-danger:hover {
+  background: #d00b01;
+  border-color: #d00b01;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.content-padding {
+  background-color: ;
+  padding: 10px;
+}
+
+.navbar-spacer {
+  width: 100%;
+  height: 100px;
+
+}
+
+
+.blog-card {
+  color: white;
+  position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.card-outline-invisible {
+  border-color: transparent;
+
+}
+
+
+.fa-pencil {
+  color: #d00b01;
+}
+
+.fa-clock-o {
+  color: #d00b01;
+}
+
+.fa-comments {
+  color: #d00b01;
+}
+
+.floating-box {
+    display: inline-block;
+    margin: none;
+    float: right;
+}
+
+.floating-box-left {
+    display: inline-block;
+    margin: none;
+    float: left;
+    color: #d3d3d3;
+    margin-top: 10px;
+}
+hr.style3 {
+	border-top: 1px dashed #8c8b8b;
+}
+
+hr.style4 {
+	border-top: 1px solid #d3d3d3;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.img-holder {position: relative; display: inline-block;}
+.img-holder a img {display: block;}
+.img-holder a p {position: absolute; top: 50%; left: 0; right: 0; transform: translate(0, -50%); text-align: center; color: #fff; text-shadow: 0 0 15px;}
+
+.marginx-10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.page-item a {
+  color: #d00b01
+}
+.page-item a:hover {
+  color: #d00b01
+}
+
+.text-muted > a {
+  color: #636c72;
+}
+.text-muted > a:hover {
+  color: #d00b01;
+}
+
+
+@media (min-width: 544px) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+
+@media (min-width: 594px) {
+.card-deck .card {
+      display: block;
+      flex-basis: 250px;
+      max-width: calc(50% - 32px);
+            }
+}
+@media (min-width: 876px) {
+.card-deck .card {
+      display: block;
+      flex-basis: 250px;
+      max-width: calc(33.3333% - 32px);
+    }
+}
+
+/*@media (min-width: 992px) {
+.card-deck .card {
+      display: block;
+      flex-basis: 20%;
+    }
+}*/
+@media (min-width: 1156px) {
+.card-deck .card {
+      display: block;
+      flex-basis: 250px;
+      max-width: calc(25% - 32px);
+    }
+}
+
+.footer {
+  flex: 0 0 auto;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background: rgb(64, 64, 64); /* The Fallback */
+  background:rgba(0, 0, 0, .8);   /* for latest browsers */
+}
+
+.footer .copyright {
+  background: rgba(0, 0, 0, 0.2);   /* for latest browsers */
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.follow_us a {
+	background-image:url(../img/top_socials.png);
+	background-repeat:no-repeat;
+	height:30px;
+	width:30px;
+	display:inline-block;
+	text-indent:-9999px;
+	text-align:left;
+}
+.follow_us a.facebook {background-position:0 0;
+}
+.follow_us a.facebook:hover {background-position:0 -30px;
+}
+.follow_us a.vimeo {background-position:-35px 0;
+}
+.follow_us a.vimeo:hover {background-position:-35px -30px;
+}
+.follow_us a.tumbrl {background-position:-70px 0;
+}
+.follow_us a.tumbrl:hover {background-position:-70px -30px;
+}
+.follow_us a.twitter {background-position:-105px 0;
+}
+.follow_us a.twitter:hover {background-position:-105px -30px;
+}
+.follow_us a.delicious {background-position:-140px 0;
+}
+.follow_us a.delicious:hover {background-position:-140px -30px;
+}

@@ -1,0 +1,61 @@
+{% extends 'pages/page.html' %}
+
+{% load static from staticfiles %}
+{% load mezzanine_tags %}
+{% load blog_tags pages_tags %}
+
+{% block navigation %}
+     <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse">
+       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      {% page_menu "pages/menus/primary.html" %}
+    </nav>
+{% endblock navigation %}
+
+{% block carousel %}
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {% for slide in page.homepage.slides.all %}
+    <li data-target="#myCarousel" data-slide-to="{ forloop.counter0 }" {% if forloop.first %} class="active" {% endif %}></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for slide in page.homepage.slides.all %}
+    <div class="carousel-item {% if forloop.first %} active {% endif %}">
+      <img class= "d-block img-fluid" src="{{ MEDIA_URL }}{{ slide.image }}" alt="{{slide.image.title}}">
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Carousel Caption -->
+    <div class="carousel-caption d-none d-md-block">
+      {% editable page.homepage.topheading page.homepage.headline page.homepage.subheading page.homepage.buttontext %}
+        <h3>{{ page.homepage.topheading }}</h3>
+        <h1>{{ page.homepage.headline }}</h1>
+        <p>{{ page.homepage.subheading }}</p>
+        <p><a class="btn btn-lg btn-danger" href="/destinations" role="button">{{ page.homepage.buttontext }}</a></p>
+      {% endeditable %}
+    </div>
+  <div>
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+</div>
+<div>
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+
+
+<!-- /.carousel -->
+{% endblock %}
+{% block footer %}
+{% endblock %}

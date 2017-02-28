@@ -1,0 +1,71 @@
+{% extends "pages/page.html" %}
+
+{% load pages_tags mezzanine_tags blog_tags rtwpage_tags staticfiles %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+<!-- Fixed Top-Navbar (different bg for galleries)
+================================================== -->
+
+{% block gallery %}
+{{ block.super }}
+
+<!--{% editable page.gallery.content %}
+{{ page.gallery.content|richtext_filters|safe }}
+{% endeditable %}
+</div>-->
+<div class="container-fluid">
+<div class="card-deck">
+{% with page.gallery.images.all as images %}
+{% for image in images %}
+    <div class="card m-3" style="min-width: 250px;">
+      <a rel="prettyPhoto[Gallery1]" title="{{ image.description }}" href="{{ MEDIA_URL }}{% thumbnail image.file 1200 0 %}">
+      <img class="card-img img-fluid" src="{{ MEDIA_URL }}{% thumbnail image.file 800 600 %}" alt="{{ page.gallery.title }}"></a>
+  </div>
+{% endfor %}
+{% endwith %}
+
+
+{% with page.gallery.videos.all as videos %}
+{% for video in videos %}
+<div class="card m-3" style="min-width: 250px;">
+    <div class="embed-responsive embed-responsive-4by3">
+      <a title="{{ video.title }}" href="{{ video.video_url }}" rel="prettyPhoto">
+      <iframe src="{{ video.video_url }}" allowfullscreen></iframe></a>
+    </div>
+</div>
+{% endfor %}
+{% endwith %}
+
+
+{% with page.gallery.title as title %}
+{% blog_recent_posts limit=10 category=title as recent_posts %}
+{% for recent_post in recent_posts %}
+  {% if settings.BLOG_USE_FEATURED_IMAGE and recent_post.featured_image %}
+  <div class="card card-inverse m-3" style="min-width: 250px;">
+  <a href="{{ recent_post.get_absolute_url }}">
+    <img class="card-img img-fluid" src="{{ MEDIA_URL }}{% thumbnail recent_post.featured_image 800 600 %}">
+    <div class="card-img-overlay">
+   <h4 class="card-title">{{ recent_post.title }}</h4>
+   <p class="card-text" style="color: white">{{ recent_post.content|striptags|cut_content }}... Read more</p>
+   <div class="blog-card">
+   <small class="post-meta">
+   <i class="fa fa-clock-o" style="color: white" aria-hidden="true"></i>
+   <span class="mr-1" style="color: white">{{ recent_post.publish_date|date:"F d, Y" }}</span>
+ </small>
+ </div>
+ </div>
+ </a>
+ </div>
+{% endif %}
+{% endfor %}
+{% endwith %}
+ </div>
+
+ </div>
+
+
+
+{{ block.super }}
+{% endblock gallery %}

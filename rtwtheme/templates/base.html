@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+<script src="https://use.fontawesome.com/d10a0d0138.js"></script>
+
+{% ifinstalled mezzanine.blog %}
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+{% endifinstalled %}
+
+{% compress css %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<!-- Custom styles for this template -->
+<!--<link href="{% static "css/carousel.css" %}" rel="stylesheet">-->
+<link href="{% static "css/prettyPhoto.css" %}" rel="stylesheet" type="text/css">
+<link href="{% static "css/theme.css" %}" rel="stylesheet">
+<link href="{% static "css/carousel.fullscreen.css" %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}">
+
+  <!--header-->
+
+  <!-- Fixed Top-Navbar
+  ================================================== -->
+  <header>
+  {% block navigation %}
+
+     <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse navbar-gallery">
+       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+        {% page_menu "pages/menus/primary.html" %}
+    </nav>
+  <div class ="navbar-spacer">
+     &nbsp;
+  </div>
+  {% endblock navigation %}
+</header>
+  <!--header-->
+<section class="main-content">
+{% block card_layout %}
+{% endblock card_layout %}
+
+{% block main %}
+{% endblock %}
+
+{% block carousel %}
+{% endblock %}
+
+{% block gallery %}
+{% endblock %}
+</section>
+
+
+
+
+  <!-- /.container -->
+
+  <!-- FOOTER -->
+  {% block footer %}
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <div class="foot_logo"><a href=#><!--<img src=# alt="" />--></a></div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 p-3">
+               {% search_form %}
+        </div>
+      </div>
+    </div>
+              <div class="text-center">
+                {% if settings.SOCIAL_LINK_FACEBOOK %}
+                  <a target="_blank" href="{{ settings.SOCIAL_LINK_FACEBOOK }}"><img src="{% static "img/facebooksmall.png" %}" /></a>
+                {% endif %}
+                {% if settings.SOCIAL_LINK_TWITTER %}
+                  <a class="mr-1" target="_blank" href="{{ settings.SOCIAL_LINK_TWITTER }}"><img src="{% static "img/twittersmall.png" %}" /></a>
+                {% endif %}
+                {% if settings.SOCIAL_LINK_INSTAGRAM %}
+                  <a class="mr-1" target="_blank" href="{{ settings.SOCIAL_LINK_INSTAGRAM}}"><img src="{% static "img/instagramsmall.png" %}" /></a>
+                {% endif %}
+                {% if settings.SOCIAL_LINK_YOUTUBE %}
+                <a class="mr-1" target="_blank" href="{{ settings.SOCIAL_LINK_YOUTUBE }}"><img src="{% static "img/youtubesmall.png" %}" /></a>
+                {% endif %}
+              </div>
+
+      <div class="text-center text-muted copyright">&copy; 2017 findingninjabunny.com</div>
+  {% endblock footer %}
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+
+  {% compress js %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src="{% static "js/carousel.js" %}"></script>
+  <script src="{% static "js/jquery.prettyPhoto.js" %}" type="text/javascript" charset="utf-8"></script>
+
+  {% block extra_js %}
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $("a[rel^='prettyPhoto']").prettyPhoto();
+    });
+  </script>
+  {% endblock %}
+
+  {% endcompress %}
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug
+  <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+
+</footer>
+
+{% block footer_js %}
+{% include "includes/footer_scripts.html" %}
+{% endblock %}
+
+
+
+</body>
+</html>

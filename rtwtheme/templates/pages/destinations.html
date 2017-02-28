@@ -1,0 +1,32 @@
+{% extends 'pages/page.html' %}
+
+{% load pages_tags mezzanine_tags blog_tags i18n staticfiles %}
+
+{% block card_layout %}
+<div class="container-fluid">
+<div class="row">
+<div class="col-12">
+<div class="card-deck">
+{% for card in cards %}
+{% with card.gallery.images.all|first as image %}
+  <div class="card m-3" style="min-width: 250px;">
+      <a href="{{ card.get_absolute_url }}">
+      <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{% thumbnail image.file 1000 650 %}" alt="Name"></a>
+      <div class="card-block">
+        <h4 class="card-title">{{ card.title }}</h4>
+        <p class="card-text">{{ card.gallery.content|richtext_filters|safe }}</p>
+        <p class="card-text"><small class="text-muted">Last updated: {{ card.updated|date:"F d, Y" }}</small></p>
+      </div>
+  </div>
+{% endwith %}
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+<!--<div class="card-img-overlay">
+    <h4 class="card-title">{{ card.title }}</h4>
+    <p class="card-text">{{ card.gallery.content|richtext_filters|safe }}</p>
+</div>-->
