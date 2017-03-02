@@ -44,15 +44,9 @@ from django.utils.translation import ugettext_lazy as _
 
 PAGE_MENU_TEMPLATES = (
      (1, _("Top navigation bar"), "pages/menus/primary.html"),
-<<<<<<< HEAD
      (2, _("Left-hand tree"), "pages/menus/tree.html"),
      (3, _("Footer"), "pages/menus/footer.html"),
  )
-=======
-#     (2, _("Left-hand tree"), "pages/menus/tree.html"),
-#     (3, _("Footer"), "pages/menus/footer.html"),
-# )
->>>>>>> 3c8bbfc0407117feee6b7f2baf798ab55a410838
 
 # A sequence of fields that will be injected into Mezzanine's (or any
 # library's) models. Each item in the sequence is a four item sequence.
