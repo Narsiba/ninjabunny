@@ -20,8 +20,8 @@
 {% with page.gallery.images.all as images %}
 {% for image in images %}
     <div class="card m-3" style="min-width: 250px;">
-      <a rel="prettyPhoto[Gallery1]" title="{{ image.description }}" href="{{ MEDIA_URL }}{% thumbnail image.file 1200 0 %}">
-      <img class="card-img img-fluid" src="{{ MEDIA_URL }}{% thumbnail image.file 800 600 %}" alt="{{ page.gallery.title }}"></a>
+      <a rel="prettyPhoto[Gallery1]" title="{{ image.description }}" href="{{ MEDIA_URL }}{% thumbnail image.file 800 0 %}">
+      <img class="card-img img-fluid" src="{{ MEDIA_URL }}{% thumbnail image.file 550 0 %}" alt="{{ page.gallery.title }}"></a>
   </div>
 {% endfor %}
 {% endwith %}
