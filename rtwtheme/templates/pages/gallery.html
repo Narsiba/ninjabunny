@@ -20,7 +20,7 @@
 {% with page.gallery.images.all as images %}
 {% for image in images %}
   <div class="mb-1">
-      <a rel="prettyPhoto[gallery1]" title="{{ image.description }}" href="{{ MEDIA_URL }}{% thumbnail image.file 800 0 %}">
+      <a rel="prettyPhoto[gallery1]" title="{{ image.description }}" href="{{ MEDIA_URL }}{{ image.file }}">
       <img class="img-fluid" src="{{ MEDIA_URL }}{{ image.file }}" alt="{{ page.gallery.title }}"></a>
   </div>
 {% endfor %}
